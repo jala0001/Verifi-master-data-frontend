@@ -47,3 +47,26 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-info {
+  font-size: 14px;
+  color: #bdc3c7;
+}
+
+.user-info strong {
+  color: white;
+}
+
+.btn-logout {
+  background-color: #e74c3c !important;
+}
+
+.btn-logout:hover {
+  background-color: #c0392b !important;
+}
