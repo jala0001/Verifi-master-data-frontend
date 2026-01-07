@@ -9,14 +9,54 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+}
+
 .app-header h1 {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   font-size: 24px;
+  margin: 0;
+}
+
+.user-info {
+  font-size: 14px;
+  color: #bdc3c7;
+}
+
+.user-info strong {
+  color: white;
 }
 
 .app-header nav {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 .app-header nav button {
@@ -46,21 +86,6 @@ button {
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.header-left {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.user-info {
-  font-size: 14px;
-  color: #bdc3c7;
-}
-
-.user-info strong {
-  color: white;
 }
 
 .btn-logout {

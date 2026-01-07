@@ -33,17 +33,22 @@ function TableData({ tableId, onNavigate }) {
   };
 
   const downloadJson = () => {
-  const jsonData = JSON.stringify(rows, null, 2);
-  const blob = new Blob([jsonData], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `${tableData.tableName}.json`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-};
+    const cleanedRows = rows.map(row => {
+      const { id, ...rowWithoutId } = row;
+      return rowWithoutId;
+    });
+  
+    const jsonData = JSON.stringify(cleanedRows, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${tableData.tableName}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   const startAddingRow = () => {
     const emptyRow = {};
@@ -66,7 +71,8 @@ function TableData({ tableId, onNavigate }) {
       setNewRowData({});
       loadTableData();
     } catch (err) {
-      alert('Failed to add row: ' + (err.response?.data?.message || err.message));
+      const errorMessage = err.response?.data?.error || err.message || 'Unknown error';
+      alert('Failed to add row: ' + errorMessage);
     }
   };
 
@@ -87,7 +93,8 @@ function TableData({ tableId, onNavigate }) {
       setEditingData({});
       loadTableData();
     } catch (err) {
-      alert('Failed to update row: ' + (err.response?.data?.message || err.message));
+      const errorMessage = err.response?.data?.error || err.message || 'Unknown error';
+      alert('Failed to update row: ' + errorMessage);
     }
   };
 

@@ -6,6 +6,7 @@ import CreateTable from './pages/CreateTable';
 import TableData from './pages/TableData';
 import UserManagement from './pages/UserManagement';
 import { getCurrentUser, removeToken, removeCurrentUser } from './services/api';
+import logo from './assets/verifi-logo.png'; // Tilføj denne linje
 
 function App() {
   const [currentPage, setCurrentPage] = useState('tableList');
@@ -50,18 +51,25 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <div className="header-left">
-          <h1>Verifi Master Data Management</h1>
-          <span className="user-info">
-            Logged in as: <strong>{currentUser.username}</strong> ({currentUser.role})
-          </span>
+        <div className="header-content">
+          <img src={logo} alt="Verifi Logo" className="header-logo" />
+          
+          <div className="header-center">
+            <div className="header-left">
+              <h1>Verifi Master Data Management</h1>
+              <span className="user-info">
+                Logged in as: <strong>{currentUser.username}</strong> ({currentUser.role})
+              </span>
+            </div>
+            
+            <nav>
+              <button onClick={() => navigateTo('tableList')}>Table Overview</button>
+              {isAdmin && <button onClick={() => navigateTo('createTable')}>Create Table</button>}
+              {isAdmin && <button onClick={() => navigateTo('userManagement')}>Users</button>}
+              <button className="btn-logout" onClick={handleLogout}>Logout</button>
+            </nav>
+          </div>
         </div>
-        <nav>
-          <button onClick={() => navigateTo('tableList')}>Table Overview</button>
-          {isAdmin && <button onClick={() => navigateTo('createTable')}>Create Table</button>}
-          {isAdmin && <button onClick={() => navigateTo('userManagement')}>Users</button>}
-          <button className="btn-logout" onClick={handleLogout}>Logout</button>
-        </nav>
       </header>
 
       <main className="app-main">
